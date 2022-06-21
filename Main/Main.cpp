@@ -35,9 +35,12 @@ struct list
 		cin >> Name;
 		cout << "\n";
 		cout << "Print priority list: ";
+		cout << "priority Hight: ";
+		cout << "priority Medium: ";
+		cout << "priority Low: ";
 		cin >> priority;
 		cout << "\n";
-		cout << "Print description list: ";	
+		cout << "Print description list: ";
 		cin >> description;
 		cout << "\n";
 		cout << "Print Day in Data: ";
@@ -59,7 +62,92 @@ struct list
 		cin >> DateAndTime.planTime.Second;
 		cout << "\n-----------------------\n";
 	}
-	void deleteSpysok()
+	void ChangeList()
+	{
+		string choiselist;
+		string choiseInIf;
+		cout << "What you want Change in list.(Name, Priority, Description, Date)" << endl;
+		cin >> choiselist;
+		for (int i = 0; i < 10; i++)
+		{
+			if (choiselist == "Name")
+			{
+				cout << "Print name" << endl;
+				cin >> choiseInIf;
+				if (choiseInIf = Name)
+				{
+					for (int i = 0; i < Name.length(); i++)
+					{
+						Name.erase(i);
+					}
+					cout << "Change name" << endl;
+					cin >> Name;
+				}
+			}
+			else if (choiselist == "Priority")
+			{
+				cout << "Print name" << endl;
+				if (choiseInIf = Name)
+				{
+					for (int i = 0; i < priority.length(); i++)
+					{
+						Name.erase(i);
+					}
+					cout << "Change priority" << endl;
+					cin >> priority;
+				}
+			}
+			else if (choiselist == "Description")
+			{
+				cout << "Print name" << endl;
+				if (choiseInIf = Name)
+				{
+					for (int i = 0; i < priority.length(); i++)
+					{
+						Name.erase(i);
+					}
+					cout << "Change Description" << endl;
+					cin >> description;
+				}
+			}
+			else if (choiselist == "Date")
+			{
+				cout << "Print name" << endl;
+				if (choiseInIf = Name)
+				{
+					DateAndTime.Day = 0;
+					DateAndTime.Month = 0;
+					DateAndTime.Year = 0;
+					DateAndTime.planTime.Hour = 0;
+					DateAndTime.planTime.Minute = 0;
+					DateAndTime.planTime.Second = 0;
+					cout << "Print Day in Data: ";
+					cin >> DateAndTime.Day;
+					cout << "\n";
+					cout << "Print Month in Data: ";
+					cin >> DateAndTime.Month;
+					cout << "\n";
+					cout << "Print Year in Data: ";
+					cin >> DateAndTime.Year;
+					cout << "\n";
+					cout << "Print Hour: ";
+					cin >> DateAndTime.planTime.Hour;
+					cout << "\n-----------------------\n";
+					cout << "Print Minute: ";
+					cin >> DateAndTime.planTime.Minute;
+					cout << "\n-----------------------\n";
+					cout << "Print Second: ";
+					cin >> DateAndTime.planTime.Second;
+					cout << "\n-----------------------\n";
+				}
+			}
+			else
+			{
+				cout << "or you print whith problem or you want exit." << endl;
+			}
+		}
+	}
+	void deleteList()
 	{
 		for (int i = 0; i < Name.length(); i++)
 		{
@@ -73,25 +161,37 @@ struct list
 		{
 			description.erase(i);
 		}
+		DateAndTime.Day = 0;
+		DateAndTime.Month = 0;
+		DateAndTime.Year = 0;
+		DateAndTime.planTime.Hour = 0;
+		DateAndTime.planTime.Minute = 0;
+		DateAndTime.planTime.Second = 0;
 	}
-	void SearchInSpysok()
+};
+void SearchInList(list alls[])
+{
+	int Vibor;
+	string ViborInSwitch;
+	int ViborrDay;
+	int ViborrMonth;
+	int ViborrYear;
+	cout << "Which item in the list do you want to search for?\n Have 4 Variants:\n 1.In name; \n 2. In priority; \n 3.In description;\n 4.In Date.\n Print number Variant." << endl;
+	cin >> Vibor;
+	for (int i = 0; i < 10; i++)
 	{
-		int Vibor;
-		string ViborInSwitch;
-		cout << "По какому из элементов списка вы хотите искать?\n Have 4 Variants:\n 1.In name; \n 2. In priority; \n 3.По описанию;\n 4.По дате.\n Введите номер варианта." << endl;
-		cin >> Vibor;
 		switch (Vibor)
 		{
 		case 1:
 			cout << "Print name list: ";
 			cin >> ViborInSwitch;
-			if (ViborInSwitch == Name)
+			if (ViborInSwitch == alls[i].Name)
 			{
-				cout <<"Name: " << Name << endl;
-				cout << "Priority: " << priority <<endl;
-				cout << "Description: " << description << endl;
-				cout << "Date: " << DateAndTime.Day <<"." << DateAndTime.Month << "." << DateAndTime.Year << "." << endl;
-				cout << "Time: " << DateAndTime.planTime.Hour << ":" << DateAndTime.planTime.Minute << ":" <<DateAndTime.planTime.Second << endl;
+				cout << "Name: " << alls[i].Name << endl;
+				cout << "Priority: " << alls[i].priority << endl;
+				cout << "Description: " << alls[i].description << endl;
+				cout << "Date: " << alls[i].DateAndTime.Day << "." << alls[i].DateAndTime.Month << "." << alls[i].DateAndTime.Year << "." << endl;
+				cout << "Time: " << alls[i].DateAndTime.planTime.Hour << ":" << alls[i].DateAndTime.planTime.Minute << ":" << alls[i].DateAndTime.planTime.Second << endl;
 				break;
 			}
 			else
@@ -101,13 +201,13 @@ struct list
 		case 2:
 			cout << "Print Priority list: ";
 			cin >> ViborInSwitch;
-			if (ViborInSwitch == priority)
+			if (ViborInSwitch == alls[i].priority)
 			{
-				cout << "Name: " << Name << endl;
-				cout << "Priority: " << priority << endl;
-				cout << "Description: " << description << endl;
-				cout << "Date: " << DateAndTime.Day << "." << DateAndTime.Month << "." << DateAndTime.Year << "." << endl;
-				cout << "Time: " << DateAndTime.planTime.Hour << ":" << DateAndTime.planTime.Minute << ":" << DateAndTime.planTime.Second << endl;
+				cout << "Name: " << alls[i].Name << endl;
+				cout << "Priority: " << alls[i].priority << endl;
+				cout << "Description: " << alls[i].description << endl;
+				cout << "Date: " << alls[i].DateAndTime.Day << "." << alls[i].DateAndTime.Month << "." << alls[i].DateAndTime.Year << "." << endl;
+				cout << "Time: " << alls[i].DateAndTime.planTime.Hour << ":" << alls[i].DateAndTime.planTime.Minute << ":" << alls[i].DateAndTime.planTime.Second << endl;
 				break;
 			}
 			else
@@ -117,13 +217,13 @@ struct list
 		case 3:
 			cout << "Print Description list: ";
 			cin >> ViborInSwitch;
-			if (ViborInSwitch == description)
+			if (ViborInSwitch == alls[i].description)
 			{
-				cout << "Name: " << Name << endl;
-				cout << "Priority: " << priority << endl;
-				cout << "Description: " << description << endl;
-				cout << "Date: " << DateAndTime.Day << "." << DateAndTime.Month << "." << DateAndTime.Year << "." << endl;
-				cout << "Time: " << DateAndTime.planTime.Hour << ":" << DateAndTime.planTime.Minute << ":" << DateAndTime.planTime.Second << endl;
+				cout << "Name: " << alls[i].Name << endl;
+				cout << "Priority: " << alls[i].priority << endl;
+				cout << "Description: " << alls[i].description << endl;
+				cout << "Date: " << alls[i].DateAndTime.Day << "." << alls[i].DateAndTime.Month << "." << alls[i].DateAndTime.Year << "." << endl;
+				cout << "Time: " << alls[i].DateAndTime.planTime.Hour << ":" << alls[i].DateAndTime.planTime.Minute << ":" << alls[i].DateAndTime.planTime.Second << endl;
 				break;
 			}
 			else
@@ -131,18 +231,19 @@ struct list
 				break;
 			}
 		case 4:
-			int ViborrDay = 0;
-			int ViborrMonth = 0;
-			int ViborrYear = 0;
 			cout << "Print Day list: ";
 			cin >> ViborrDay;
-			if (Viborr == Date)
+			cout << "Print Month list: ";
+			cin >> ViborrMonth;
+			cout << "Print Year list: ";
+			cin >> ViborrYear;
+			if ((ViborrDay == alls[i].DateAndTime.Day) && (ViborrMonth == alls[i].DateAndTime.Month) && (ViborrYear == alls[i].DateAndTime.Year))
 			{
-				cout << "Name: " << Name << endl;
-				cout << "Priority: " << priority << endl;
-				cout << "Description: " << description << endl;
-				cout << "Date: " << DateAndTime.Day << "." << DateAndTime.Month << "." << DateAndTime.Year << "." << endl;
-				cout << "Time: " << DateAndTime.planTime.Hour << ":" << DateAndTime.planTime.Minute << ":" << DateAndTime.planTime.Second << endl;
+				cout << "Name: " << alls[i].Name << endl;
+				cout << "Priority: " << alls[i].priority << endl;
+				cout << "Description: " << alls[i].description << endl;
+				cout << "Date: " << alls[i].DateAndTime.Day << "." << alls[i].DateAndTime.Month << "." << alls[i].DateAndTime.Year << "." << endl;
+				cout << "Time: " << alls[i].DateAndTime.planTime.Hour << ":" << alls[i].DateAndTime.planTime.Minute << ":" << alls[i].DateAndTime.planTime.Second << endl;
 				break;
 			}
 			else
@@ -153,59 +254,59 @@ struct list
 			break;
 		}
 	}
-	void listOnDayOrWeekOrMonth()
+}
+void listOnDayOrWeekOrMonth(Data DataNow, list alls[])
+{
+	for (int i = 0; i < 10; i++)
 	{
-		int Vibor;
-		cout << "Write on what day or days you want to see the case(1, 2 - 7 or 8 - 31)";
-		cin >> Vibor;
-		if (Vibor == DateNow)
+		if (alls[i].DateAndTime.Day == DataNow.Day && alls[i].DateAndTime.Month == DataNow.Month && alls[i].DateAndTime.Year == DataNow.Year)
 		{
-			if (Date == DateNow)
-			{
-				cout << "Name: " << Name << endl;
-				cout << "Priority: " << priority << endl;
-				cout << "Description: " << description << endl;
-				cout << "Date: " << Date << endl;
-				cout << "Time: " << Time << endl;
-			}
+			cout << "Name: " << alls[i].Name << endl;
+			cout << "Priority: " << alls[i].priority << endl;
+			cout << "Description: " << alls[i].description << endl;
+			cout << "Date, Day.Month.Year: " << alls[i].DateAndTime.Day << "." << alls[i].DateAndTime.Month << "." << alls[i].DateAndTime.Year << endl;
+			cout << "Time, Hours:Minute:Second  " << alls[i].DateAndTime.planTime.Hour << ":" << alls[i].DateAndTime.planTime.Hour << "." << alls[i].DateAndTime.Year << endl;
 		}
-		else if (Vibor > DateNow && Vibor <= DateNow + 7)
+		else if (alls[i].DateAndTime.Day <= DataNow.Day + 7 && alls[i].DateAndTime.Month == DataNow.Month && alls[i].DateAndTime.Year == DataNow.Year)
 		{
-			if (Date <= DateNow + 7)
-			{
-				cout << "Name: " << Name << endl;
-				cout << "Priority: " << priority << endl;
-				cout << "Description: " << description << endl;
-				cout << "Date: " << Date << endl;
-				cout << "Time: " << Time << endl;
-			}
+			cout << "Name: " << alls[i].Name << endl;
+			cout << "Priority: " << alls[i].priority << endl;
+			cout << "Description: " << alls[i].description << endl;
+			cout << "Date, Day.Month.Year: " << alls[i].DateAndTime.Day << "." << alls[i].DateAndTime.Month << "." << alls[i].DateAndTime.Year << endl;
+			cout << "Time, Hours:Minute:Second  " << alls[i].DateAndTime.planTime.Hour << ":" << alls[i].DateAndTime.planTime.Hour << "." << alls[i].DateAndTime.Year << endl;
 		}
-		else if (Vibor > DateNow && Vibor <= DateNow + 31)
+		else if (alls[i].DateAndTime.Day <= DataNow.Day + 31 && alls[i].DateAndTime.Month == DataNow.Month && alls[i].DateAndTime.Year == DataNow.Year)
 		{
-			if (Date <= DateNow + 31)
-			{
-				cout << "Name: " << Name << endl;
-				cout << "Priority: " << priority << endl;
-				cout << "Description: " << description << endl;
-				cout << "Date: " << Date << endl;
-				cout << "Time: " << Time << endl;
-			}
+			cout << "Name: " << alls[i].Name << endl;
+			cout << "Priority: " << alls[i].priority << endl;
+			cout << "Description: " << alls[i].description << endl;
+			cout << "Date, Day.Month.Year: " << alls[i].DateAndTime.Day << "." << alls[i].DateAndTime.Month << "." << alls[i].DateAndTime.Year << endl;
+			cout << "Time, Hours:Minute:Second  " << alls[i].DateAndTime.planTime.Hour << ":" << alls[i].DateAndTime.planTime.Hour << "." << alls[i].DateAndTime.Year << endl;
 		}
 		else
 		{
 			cout << "You haven`t plan on this Date" << endl;
 		}
 	}
-};
+}
 
 int main()
 {
 	setlocale(LC_ALL, "Russian");
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
-	
-
-
+	Data YourDay;
+	list firstList;
+	list secondList;
+	list thirtList;
+	list fourthList;
+	list fivethList;
+	list sixthList;
+	list seventhList;
+	list eigthList;
+	list ninethList;
+	list tenthList;
+	list tenList[10]{ firstList ,secondList,thirtList,fourthList,fivethList,sixthList,seventhList,eigthList,ninethList,tenthList };
 	system("pause");
 	return 0;
 }
