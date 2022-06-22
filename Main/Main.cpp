@@ -74,7 +74,7 @@ struct list
 			{
 				cout << "Print name" << endl;
 				cin >> choiseInIf;
-				if (choiseInIf = Name)
+				if (choiseInIf == Name)
 				{
 					for (int i = 0; i < Name.length(); i++)
 					{
@@ -87,7 +87,7 @@ struct list
 			else if (choiselist == "Priority")
 			{
 				cout << "Print name" << endl;
-				if (choiseInIf = Name)
+				if (choiseInIf == Name)
 				{
 					for (int i = 0; i < priority.length(); i++)
 					{
@@ -100,7 +100,7 @@ struct list
 			else if (choiselist == "Description")
 			{
 				cout << "Print name" << endl;
-				if (choiseInIf = Name)
+				if (choiseInIf == Name)
 				{
 					for (int i = 0; i < priority.length(); i++)
 					{
@@ -113,7 +113,7 @@ struct list
 			else if (choiselist == "Date")
 			{
 				cout << "Print name" << endl;
-				if (choiseInIf = Name)
+				if (choiseInIf == Name)
 				{
 					DateAndTime.Day = 0;
 					DateAndTime.Month = 0;
@@ -290,11 +290,41 @@ void listOnDayOrWeekOrMonth(Data DataNow, list alls[])
 	}
 }
 
+template <typename T> void bubbleSortForData(list arr[], int size)
+{
+	int i, j;         //индексы в массиве 
+	T x;	//временая переменая для хранения содержимого элемента
+	for (i = 0; i < size; i++) { // i - номер прохода
+		for (j = size - 1; j > i; j--) { // внутренний цикл
+		// прохода
+			if (arr[j - 1].Day > arr[j].Day && arr[j - 1].Month > arr[j].Month && arr[j - 1].Year > arr[j].Year && arr[j - 1].Day != 0 && arr[j - 1].Month != 0 && arr[j - 1].Year != 0) {
+				x = arr[j - 1];
+				arr[j - 1] = arr[j];
+				arr[j] = x;
+			}
+		}
+	}
+	for (int k = 0; k <= 10; k++)
+	{
+		if (arr[k - 1].Day != 0 && arr[k - 1].Month != 0 && arr[k - 1].Year != 0)
+		{
+			cout << "Name: " << arr[k].Name << endl;
+			cout << "Priority: " << arr[k].priority << endl;
+			cout << "Description: " << arr[k].description << endl;
+			cout << "Date, Day.Month.Year: " << arr[k].DateAndTime.Day << "." << arr[k].DateAndTime.Month << "." << arr[k].DateAndTime.Year << endl;
+			cout << "Time, Hours:Minute:Second  " << arr[k].DateAndTime.planTime.Hour << ":" << arr[k].DateAndTime.planTime.Hour << "." << arr[k].DateAndTime.Year << endl;
+		}
+	}
+}
+
 int main()
 {
 	setlocale(LC_ALL, "Russian");
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
+	int choise;
+	int choiseNumber;
+	string choiseInName;
 	Data YourDay;
 	list firstList;
 	list secondList;
@@ -307,6 +337,78 @@ int main()
 	list ninethList;
 	list tenthList;
 	list tenList[10]{ firstList ,secondList,thirtList,fourthList,fivethList,sixthList,seventhList,eigthList,ninethList,tenthList };
+	cout << "Hello, In this programm you can create, change, delete and sort list." << endl;
+	cout << "Please print today data. First you need print day, second you need print month and thirt you need print year;"<<endl;
+	cin >> YourDay.Day;
+	cin >> YourDay.Month;
+	cin >> YourDay.Year;
+	cout << "Thank you!!! \nNow Print. ";
+	while (true)
+	{
+		cout << "What you want doing with your list.\n1) create list. \n2) change list. \n3)delete list.\n4)Search all list.5)SortList." << endl;
+		cin >> choise;
+		switch (choise)
+		{
+		case 1:
+			cout << "Print. Which one of ellement you want create (1 - 10): ";
+			cin >> choiseNumber;
+			for (size_t i = 0; i < 10; i++)
+			{
+				if (choiseNumber == i + 1)
+				{
+					tenList[i].createSpysok();
+				}
+			}
+			break;
+		case 2:
+			cout << "Print. Which one of ellement you want change (1 - 10): ";
+			cin >> choiseNumber;
+			for (size_t i = 0; i < 10; i++)
+			{
+				if (choiseNumber == i + 1)
+				{
+					tenList[i].ChangeList();
+				}
+			}
+			break;
+		case 3:
+			cout << "Print. Which one of ellement you want delete (1 - 10): ";
+			cin >> choiseNumber;
+			for (size_t i = 0; i < 10; i++)
+			{
+				if (choiseNumber == i + 1)
+				{
+					tenList[i].deleteList();
+				}
+			}
+			break;
+		case 4:
+			cout << "Print. Which one of ellement you want SearchList (1 - 10): ";
+			cin >> choiseNumber;
+			for (size_t i = 0; i < 10; i++)
+			{
+				if (choiseNumber == i + 1)
+				{
+					listOnDayOrWeekOrMonth(YourDay,tenList);
+				}
+			}
+			break;
+		case 5:
+			cout << "Print. Which one of ellement you want bubbleSortForData (1 - 10): ";
+			cin >> choiseNumber;
+			for (size_t i = 0; i < 10; i++)
+			{
+				if (choiseNumber == i + 1)
+				{
+					bubbleSortForData(tenList, 10);
+				}
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
 	system("pause");
 	return 0;
 }
