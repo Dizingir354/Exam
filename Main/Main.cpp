@@ -17,9 +17,9 @@ struct Time
 
 struct Data
 {
-	int Day;
-	int Month;
-	int Year;
+	int Day = 0;
+	int Month = 0;
+	int Year = 0;
 	Time planTime;
 };
 
@@ -40,14 +40,30 @@ struct list
 		cout << "priority Low: ";
 		cin >> priority;
 		cout << "\n";
-		cout << "Print description list: ";
+		cout << "Print description list(If you want touch space print <<_>>): ";
 		cin >> description;
 		cout << "\n";
 		cout << "Print Day in Data: ";
 		cin >> DateAndTime.Day;
+		if (DateAndTime.Day == 0 || DateAndTime.Day > 31)
+		{
+			while (DateAndTime.Day == 0 || DateAndTime.Day > 31)
+			{
+				cout << "Day can not zero. Please print Day in Data: ";
+				cin >> DateAndTime.Day;
+			}
+		}
 		cout << "\n";
 		cout << "Print Month in Data: ";
 		cin >> DateAndTime.Month;
+		if (DateAndTime.Month == 0 || DateAndTime.Month > 12)
+		{
+			while (DateAndTime.Month == 0 || DateAndTime.Month > 12)
+			{
+				cout << "Month can not zero. Please print Day in Data: ";
+				cin >> DateAndTime.Month;
+			}
+		}
 		cout << "\n";
 		cout << "Print Year in Data: ";
 		cin >> DateAndTime.Year;
@@ -144,6 +160,7 @@ struct list
 			else
 			{
 				cout << "or you print whith problem or you want exit." << endl;
+				exit;
 			}
 		}
 	}
@@ -178,13 +195,13 @@ void SearchInList(list alls[])
 	int ViborrYear;
 	cout << "Which item in the list do you want to search for?\n Have 4 Variants:\n 1.In name; \n 2. In priority; \n 3.In description;\n 4.In Date.\n Print number Variant." << endl;
 	cin >> Vibor;
-	for (int i = 0; i < 10; i++)
+	
+	if (Vibor == 1)
 	{
-		switch (Vibor)
+		cout << "Print name list: ";
+		cin >> ViborInSwitch;
+		for (int i = 0; i < 10; i++)
 		{
-		case 1:
-			cout << "Print name list: ";
-			cin >> ViborInSwitch;
 			if (ViborInSwitch == alls[i].Name)
 			{
 				cout << "Name: " << alls[i].Name << endl;
@@ -194,13 +211,14 @@ void SearchInList(list alls[])
 				cout << "Time: " << alls[i].DateAndTime.planTime.Hour << ":" << alls[i].DateAndTime.planTime.Minute << ":" << alls[i].DateAndTime.planTime.Second << endl;
 				break;
 			}
-			else
-			{
-				break;
-			}
-		case 2:
-			cout << "Print Priority list: ";
-			cin >> ViborInSwitch;
+		}
+	}
+	else if (Vibor == 2)
+	{
+		cout << "Print Priority list: ";
+		cin >> ViborInSwitch;
+		for (int i = 0; i < 10; i++)
+		{
 			if (ViborInSwitch == alls[i].priority)
 			{
 				cout << "Name: " << alls[i].Name << endl;
@@ -210,13 +228,14 @@ void SearchInList(list alls[])
 				cout << "Time: " << alls[i].DateAndTime.planTime.Hour << ":" << alls[i].DateAndTime.planTime.Minute << ":" << alls[i].DateAndTime.planTime.Second << endl;
 				break;
 			}
-			else
-			{
-				break;
-			}
-		case 3:
-			cout << "Print Description list: ";
-			cin >> ViborInSwitch;
+		}
+	}
+	else if (Vibor == 3)
+	{
+		cout << "Print Description list: ";
+		cin >> ViborInSwitch;
+		for (int i = 0; i < 10; i++)
+		{
 			if (ViborInSwitch == alls[i].description)
 			{
 				cout << "Name: " << alls[i].Name << endl;
@@ -226,17 +245,18 @@ void SearchInList(list alls[])
 				cout << "Time: " << alls[i].DateAndTime.planTime.Hour << ":" << alls[i].DateAndTime.planTime.Minute << ":" << alls[i].DateAndTime.planTime.Second << endl;
 				break;
 			}
-			else
-			{
-				break;
-			}
-		case 4:
-			cout << "Print Day list: ";
-			cin >> ViborrDay;
-			cout << "Print Month list: ";
-			cin >> ViborrMonth;
-			cout << "Print Year list: ";
-			cin >> ViborrYear;
+		}
+	}
+	else if (Vibor == 4)
+	{
+		cout << "Print Day list: ";
+		cin >> ViborrDay;
+		cout << "Print Month list: ";
+		cin >> ViborrMonth;
+		cout << "Print Year list: ";
+		cin >> ViborrYear;
+		for (int i = 0; i < 10; i++)
+		{
 			if ((ViborrDay == alls[i].DateAndTime.Day) && (ViborrMonth == alls[i].DateAndTime.Month) && (ViborrYear == alls[i].DateAndTime.Year))
 			{
 				cout << "Name: " << alls[i].Name << endl;
@@ -246,14 +266,9 @@ void SearchInList(list alls[])
 				cout << "Time: " << alls[i].DateAndTime.planTime.Hour << ":" << alls[i].DateAndTime.planTime.Minute << ":" << alls[i].DateAndTime.planTime.Second << endl;
 				break;
 			}
-			else
-			{
-				break;
-			}
-		default:
-			break;
 		}
 	}
+	
 }
 void listOnDayOrWeekOrMonth(Data DataNow, list alls[])
 {
@@ -293,20 +308,20 @@ void listOnDayOrWeekOrMonth(Data DataNow, list alls[])
 template <typename T> void bubbleSortForData(list arr[], int size)
 {
 	int i, j;         //индексы в массиве 
-	T x;	//временая переменая для хранения содержимого элемента
+	list x;	//временая переменая для хранения содержимого элемента
 	for (i = 0; i < size; i++) { // i - номер прохода
 		for (j = size - 1; j > i; j--) { // внутренний цикл
 		// прохода
-			if (arr[j - 1].Day > arr[j].Day && arr[j - 1].Month > arr[j].Month && arr[j - 1].Year > arr[j].Year && arr[j - 1].Day != 0 && arr[j - 1].Month != 0 && arr[j - 1].Year != 0) {
+			if (arr[j - 1].DateAndTime.Day > arr[j].DateAndTime.Day && arr[j - 1].DateAndTime.Month >= arr[j].DateAndTime.Month && arr[j - 1].DateAndTime.Year >= arr[j].DateAndTime.Year && arr[j - 1].DateAndTime.Day != 0 && arr[j - 1].DateAndTime.Month != 0 && arr[j - 1].DateAndTime.Year != 0 || arr[j - 1].DateAndTime.Day < arr[j].DateAndTime.Day && arr[j - 1].DateAndTime.Month > arr[j].DateAndTime.Month && arr[j - 1].DateAndTime.Year > arr[j].DateAndTime.Year && arr[j - 1].DateAndTime.Day != 0 && arr[j - 1].DateAndTime.Month != 0 && arr[j - 1].DateAndTime.Year != 0) {
 				x = arr[j - 1];
 				arr[j - 1] = arr[j];
 				arr[j] = x;
 			}
 		}
 	}
-	for (int k = 0; k <= 10; k++)
+	for (int k = 0; k <= size; k++)
 	{
-		if (arr[k - 1].Day != 0 && arr[k - 1].Month != 0 && arr[k - 1].Year != 0)
+		if (arr[k].DateAndTime.Day != 0 && arr[k].DateAndTime.Month != 0 && arr[k].DateAndTime.Year != 0)
 		{
 			cout << "Name: " << arr[k].Name << endl;
 			cout << "Priority: " << arr[k].priority << endl;
@@ -345,7 +360,7 @@ int main()
 	cout << "Thank you!!! \nNow Print. ";
 	while (true)
 	{
-		cout << "What you want doing with your list.\n1) create list. \n2) change list. \n3)delete list.\n4)Search all list.5)SortList." << endl;
+		cout << "What you want doing with your list.\n1) create list. \n2) change list. \n3)delete list.\n4)Search all on day or week or month.\n5)SortList.\n6)SearchInList." << endl;
 		cin >> choise;
 		switch (choise)
 		{
@@ -383,30 +398,20 @@ int main()
 			}
 			break;
 		case 4:
-			cout << "Print. Which one of ellement you want SearchList (1 - 10): ";
-			cin >> choiseNumber;
-			for (size_t i = 0; i < 10; i++)
-			{
-				if (choiseNumber == i + 1)
-				{
-					listOnDayOrWeekOrMonth(YourDay,tenList);
-				}
-			}
+			listOnDayOrWeekOrMonth(YourDay,tenList);
 			break;
 		case 5:
-			cout << "Print. Which one of ellement you want bubbleSortForData (1 - 10): ";
-			cin >> choiseNumber;
-			for (size_t i = 0; i < 10; i++)
-			{
-				if (choiseNumber == i + 1)
-				{
-					bubbleSortForData(tenList, 10);
-				}
-			}
+			bubbleSortForData<int>(tenList, 10);
+			break;
+		case 6:
+			SearchInList(tenList);
 			break;
 		default:
 			break;
 		}
+		choise = 0;
+		system("pause");
+		system("cls");
 	}
 
 	system("pause");
