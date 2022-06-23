@@ -272,9 +272,12 @@ void SearchInList(list alls[])
 }
 void listOnDayOrWeekOrMonth(Data DataNow, list alls[])
 {
+	int choise;
+	cout << "you want see list. list on 1)Day 2)Month or 3)Year. ";
+	cin >>choise;
 	for (int i = 0; i < 10; i++)
 	{
-		if (alls[i].DateAndTime.Day == DataNow.Day && alls[i].DateAndTime.Month == DataNow.Month && alls[i].DateAndTime.Year == DataNow.Year)
+		if (choise == 1 && alls[i].DateAndTime.Day == DataNow.Day && alls[i].DateAndTime.Month == DataNow.Month && alls[i].DateAndTime.Year == DataNow.Year)
 		{
 			cout << "Name: " << alls[i].Name << endl;
 			cout << "Priority: " << alls[i].priority << endl;
@@ -282,7 +285,7 @@ void listOnDayOrWeekOrMonth(Data DataNow, list alls[])
 			cout << "Date, Day.Month.Year: " << alls[i].DateAndTime.Day << "." << alls[i].DateAndTime.Month << "." << alls[i].DateAndTime.Year << endl;
 			cout << "Time, Hours:Minute:Second  " << alls[i].DateAndTime.planTime.Hour << ":" << alls[i].DateAndTime.planTime.Hour << "." << alls[i].DateAndTime.Year << endl;
 		}
-		else if (alls[i].DateAndTime.Day <= DataNow.Day + 7 && alls[i].DateAndTime.Month == DataNow.Month && alls[i].DateAndTime.Year == DataNow.Year)
+		else if (choise == 2 && alls[i].DateAndTime.Day <= DataNow.Day + 7 && alls[i].DateAndTime.Month == DataNow.Month && alls[i].DateAndTime.Year == DataNow.Year)
 		{
 			cout << "Name: " << alls[i].Name << endl;
 			cout << "Priority: " << alls[i].priority << endl;
@@ -290,7 +293,7 @@ void listOnDayOrWeekOrMonth(Data DataNow, list alls[])
 			cout << "Date, Day.Month.Year: " << alls[i].DateAndTime.Day << "." << alls[i].DateAndTime.Month << "." << alls[i].DateAndTime.Year << endl;
 			cout << "Time, Hours:Minute:Second  " << alls[i].DateAndTime.planTime.Hour << ":" << alls[i].DateAndTime.planTime.Hour << "." << alls[i].DateAndTime.Year << endl;
 		}
-		else if (alls[i].DateAndTime.Day <= DataNow.Day + 31 && alls[i].DateAndTime.Month == DataNow.Month && alls[i].DateAndTime.Year == DataNow.Year)
+		else if (choise == 3 && alls[i].DateAndTime.Day <= DataNow.Day + 31 && alls[i].DateAndTime.Month == DataNow.Month && alls[i].DateAndTime.Year == DataNow.Year)
 		{
 			cout << "Name: " << alls[i].Name << endl;
 			cout << "Priority: " << alls[i].priority << endl;
